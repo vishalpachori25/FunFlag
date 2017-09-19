@@ -41,6 +41,7 @@
     <EmbeddedResource Include="Images\greece.png" />
     <EmbeddedResource Include="Images\nepal.png" />
     <EmbeddedResource Include="Images\usa.png" />
+    <EmbeddedResource Include="Images\india.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Flag.cs" />
