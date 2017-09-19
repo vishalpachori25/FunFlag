@@ -24,17 +24,16 @@ namespace FunFlacts.Droid.Effects
         {
             base.OnElementPropertyChanged(args);
 
-            if (args.PropertyName == Label.TextProperty.PropertyName 
+            if (args.PropertyName == Label.TextProperty.PropertyName
                 || args.PropertyName == Label.FormattedTextProperty.PropertyName)
             {
                 SetUnderline(true);
             }
         }
 
-        private void SetUnderline(bool on)
+        void SetUnderline(bool on)
         {
-            var textView = Control as TextView;
-            if (textView != null)
+            if (Control is TextView textView)
             {
                 if (on)
                 {

@@ -24,17 +24,16 @@ namespace FunFlacts.iOS.Effects
         {
             base.OnElementPropertyChanged(args);
 
-            if (args.PropertyName == Label.TextProperty.PropertyName 
+            if (args.PropertyName == Label.TextProperty.PropertyName
                 || args.PropertyName == Label.FormattedTextProperty.PropertyName)
             {
                 SetUnderline(true);
             }
         }
 
-        private void SetUnderline(bool on)
+        void SetUnderline(bool on)
         {
-            var label = Control as UILabel;
-            if (label != null)
+            if (Control is UILabel label)
             {
                 var text = label.AttributedText as NSMutableAttributedString;
                 var range = new NSRange(0, text.Length);

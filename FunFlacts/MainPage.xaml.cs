@@ -6,32 +6,33 @@ using System.Collections;
 
 namespace FunFlacts
 {
-	public partial class MainPage : ContentPage
-	{
-		FlagRepository repository;
-		int currentFlag;
+    public partial class MainPage : ContentPage
+    {
+        FlagRepository repository;
+        int currentFlag;
 
-		public MainPage()
-		{
+        public MainPage()
+        {
             InitializeComponent();
 
-			// Load our data
-			repository = new FlagRepository();
+            // Load our data
+            repository = new FlagRepository();
 
             // Setup the view
             InitializeData();
         }
 
         public Flag CurrentFlag
-		{
-			get {
-				return repository.Flags[currentFlag];
-			}
-		}
-
-        private void InitializeData()
         {
-            country.ItemsSource = (IList) repository.Countries;
+            get
+            {
+                return repository.Flags[currentFlag];
+            }
+        }
+
+        void InitializeData()
+        {
+            country.ItemsSource = (IList)repository.Countries;
             //country.SelectedItem = CurrentFlag.Country;
             //country.SelectedIndexChanged += (s, e) => CurrentFlag.Country = repository.Countries[country.SelectedIndex];
             //country.BindingContext = CurrentFlag;
@@ -48,35 +49,35 @@ namespace FunFlacts
             //description.Text = CurrentFlag.Description;
 
             // Set the binding context
-            this.BindingContext = CurrentFlag;
+            BindingContext = CurrentFlag;
         }
 
-        private async void OnShow(object sender, EventArgs e)
-		{
-			await DisplayAlert(CurrentFlag.Country,
-				$"{CurrentFlag.DateAdopted:D} - {CurrentFlag.IncludesShield}: {CurrentFlag.MoreInformationUrl}", 
-				"OK");
-		}
+        async void OnShow(object sender, EventArgs e)
+        {
+            await DisplayAlert(CurrentFlag.Country,
+                $"{CurrentFlag.DateAdopted:D} - {CurrentFlag.IncludesShield}: {CurrentFlag.MoreInformationUrl}",
+                "OK");
+        }
 
-		private void OnMoreInformation(object sender, TappedEventArgs e)
-		{
-			Device.OpenUri(CurrentFlag.MoreInformationUrl);
-		}
+        void OnMoreInformation(object sender, TappedEventArgs e)
+        {
+            Device.OpenUri(CurrentFlag.MoreInformationUrl);
+        }
 
-		private void OnPrevious(object sender, EventArgs e)
-		{
-			currentFlag--;
-			if (currentFlag < 0)
-				currentFlag = 0;
-			InitializeData();
-		}
+        void OnPrevious(object sender, EventArgs e)
+        {
+            currentFlag--;
+            if (currentFlag < 0)
+                currentFlag = 0;
+            InitializeData();
+        }
 
-		private void OnNext(object sender, EventArgs e)
-		{
-			currentFlag++;
-			if (currentFlag >= repository.Flags.Count)
-				currentFlag = repository.Flags.Count-1;
-			InitializeData();
-		}
-	}
+        void OnNext(object sender, EventArgs e)
+        {
+            currentFlag++;
+            if (currentFlag >= repository.Flags.Count)
+                currentFlag = repository.Flags.Count - 1;
+            InitializeData();
+        }
+    }
 }
